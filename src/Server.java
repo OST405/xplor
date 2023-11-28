@@ -3,7 +3,7 @@ import java.net.*;
 import java.util.concurrent.*;
 import java.util.stream.IntStream;
 
-public class PraServer {
+public class Server {
     public static void main(String[] args) {
         try {
             ServerSocket serverSocket = new ServerSocket(12345);
