@@ -3,31 +3,44 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class RoundRobin {
-  private Queue<File> files;
-    private int currentIndex;
-    private Result[] results;
-    private final String keyWord;
-    public RoundRobin(File[] files, String keyWord) {
-        this.keyWord = keyWord;
-        this.currentIndex = 0;
-        this.results = new Result[files.length];
-        this.files = convertFilesToQueue(files);
+  private static Queue<File> files;
+  private static int currentIndex;
+  private static Result[] results;
+  private static String keyWord;
+
+    public static Queue<File> getFiles() {
+        return files;
     }
 
-   public void addResult(Result result) {
+    public static void setFiles(Queue<File> files) {
+        RoundRobin.files = files;
+    }
+    public static void setResults(Result[] results) {
+        RoundRobin.results = results;
+    }
+
+    public static int getCurrentIndex() {
+        return currentIndex;
+    }
+
+    public static void setCurrentIndex(int currentIndex) {
+        RoundRobin.currentIndex = currentIndex;
+    }
+
+    public static void addResult(Result result) {
         if(currentIndex >= results.length) {
             throw new IndexOutOfBoundsException("Results array is full");
         }
         results[currentIndex] = result;
         currentIndex++;
     }
-    public Result[] getResults() {
+    public static Result[] getResults() {
         return results;
     }
-    public String getKeyWord() {
+    public static String getKeyWord() {
         return keyWord;
     }
-    private Queue<File> convertFilesToQueue(File[] files) {
+    private static Queue<File> convertFilesToQueue(File[] files) {
         Queue<File> fileQueue = new LinkedList<>();
         for(File file : files) {
             fileQueue.offer(file);
