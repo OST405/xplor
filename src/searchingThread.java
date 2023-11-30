@@ -12,7 +12,7 @@ public abstract class searchingThread extends Thread{
     public searchingThread(){
         startTime = System.currentTimeMillis();
     }
-    private Result search(File file, String keyword) {
+    protected Result search(File file, String keyword) {
         String fileName = file.getName();
         String filePath = file.getAbsolutePath();
 

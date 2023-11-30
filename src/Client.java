@@ -8,17 +8,24 @@ public class Client {
             Socket socket = new Socket("localhost", 12345);
 
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            System.out.println(in.readLine());
-            System.out.println(in.readLine());
-
-            Scanner scanner = new Scanner(System.in);
-            System.out.print(in.readLine());
-            String searchPath = scanner.nextLine();
-
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            out.println(searchPath);
+            Scanner scanner = new Scanner(System.in);
 
-            System.out.println(in.readLine());
+            // Receive and print the algorithm choice prompt from the server
+            String prompt = in.readLine();
+            System.out.println(prompt);
+            Scanner scanner1 = new Scanner(System.in);
+            String keyword = scanner1.nextLine();
+            out.println(keyword);
+            prompt = in.readLine();
+            System.out.println(prompt);
+            String path = scanner1.nextLine();
+            out.println(path);
+            prompt = in.readLine();
+            System.out.println(prompt);
+            int algorithmChoice = scanner1.nextInt();
+            // Further processing based on the server's response
+            // ...
 
             socket.close();
         } catch (IOException e) {
@@ -26,4 +33,3 @@ public class Client {
         }
     }
 }
-

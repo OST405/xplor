@@ -7,6 +7,18 @@ public class RoundRobin {
   private static int currentIndex;
   private static Result[] results;
   private static String keyWord;
+  private static RoundRobinThread[] threads;
+  public static void init(String keyWord, File[] files , int noOfThreads){
+      RoundRobin.keyWord = keyWord;
+      RoundRobin.files = convertFilesToQueue(files);
+      RoundRobin.currentIndex = 0;
+      RoundRobin.results = new Result[files.length];
+      RoundRobin.threads = new RoundRobinThread[noOfThreads];
+        for(int i = 0; i < noOfThreads; i++) {
+            RoundRobinThread thread = new RoundRobinThread();
+            thread.start();
+      }
+    }
 
     public static Queue<File> getFiles() {
         return files;
@@ -42,7 +54,7 @@ public class RoundRobin {
     }
     private static Queue<File> convertFilesToQueue(File[] files) {
         Queue<File> fileQueue = new LinkedList<>();
-        for(File file : files) {
+        for (File file : files) {
             fileQueue.offer(file);
         }
         return fileQueue;
