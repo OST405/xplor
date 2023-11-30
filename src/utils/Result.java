@@ -1,15 +1,17 @@
+package utils;
+
 public class Result {
-    private int kewWordCount;
+    private int keyWordCount;
     private String fileName;
     private String filePath;
     public Result( String fileName, String filePath) {
         this.fileName = fileName;
         this.filePath = filePath;
-        this.kewWordCount = 0;
+        this.keyWordCount = 0;
     }
 
-    public int getKewWordCount() {
-        return kewWordCount;
+    public int getKeyWordCount() {
+        return keyWordCount;
     }
     public String getFileName() {
         return fileName;
@@ -17,7 +19,7 @@ public class Result {
     public String getFilePath() {
         return filePath;
     }
-    public void setKewWordCount(int kewWordCount) {
-        this.kewWordCount = kewWordCount;
+    public void setKeyWordCount(int keyWordCount) {
+        this.keyWordCount = keyWordCount;
     }
 }

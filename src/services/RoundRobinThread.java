@@ -1,6 +1,12 @@
+package services;
+
+import services.RoundRobin;
+import services.Search;
+import utils.Result;
+
 import java.io.File;
 
-public class RoundRobinThread extends searchingThread {
+public class RoundRobinThread extends Search {
 
     public RoundRobinThread() {
         super();

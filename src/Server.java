@@ -1,5 +1,7 @@
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.*;
 
 public class Server {
@@ -65,7 +67,7 @@ public class Server {
                 // if the choice is 1 then we use the equal distribution algorithm
                 // yet to be done
                 // if the choice is 2 then we use the round robin algorithm
-                //RoundRobin.init(keyword, files, noOfThreads);
+                //services.RoundRobin.init(keyword, files, noOfThreads);
 
                 // ...
 
