@@ -3,6 +3,28 @@ import java.net.*;
 import java.util.concurrent.*;
 
 public class Server {
+
+    private static List<File> listFilesRecursively(String directoryPath) {
+        List<File> fileList = new ArrayList<>();
+        File directory = new File(directoryPath);
+
+        if (directory.exists() && directory.isDirectory()) {
+            File[] files = directory.listFiles();
+
+            if (files != null) {
+                for (File file : files) {
+                    fileList.add(file);
+
+                    if (file.isDirectory()) {
+                        // Recursive call for subdirectories
+                        fileList.addAll(listFilesRecursively(file.getAbsolutePath()));
+                    }
+                }
+            }
+        }
+        return fileList;
+    }
+
     public static void main(String[] args) {
         try {
             ServerSocket serverSocket = new ServerSocket(12345);
