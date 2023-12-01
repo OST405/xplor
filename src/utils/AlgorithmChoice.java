@@ -1,6 +1,6 @@
 package utils;
 
 public enum AlgorithmChoice {
-    EQUALDISTRIBUTION,
-    ROUNDROBIN
+    EQUAL_DISTRIBUTION,
+    ROUND_ROBIN
 }
