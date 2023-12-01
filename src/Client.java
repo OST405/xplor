@@ -23,9 +23,17 @@ public class Client {
             out.println(path);
             prompt = in.readLine();
             System.out.println(prompt);
-            int algorithmChoice = scanner1.nextInt();
-            // Further processing based on the server's response
-            // ...
+            String choice = scanner1.nextLine();
+            out.println(choice);
+
+            // Receive and print the results from the server
+            while (true) {
+                String result = in.readLine();
+                if (result.equals("END")) {
+                    break;
+                }
+                System.out.println(result);
+            }
 
             socket.close();
         } catch (IOException e) {

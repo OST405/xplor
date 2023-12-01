@@ -84,6 +84,17 @@ public class RequestHandler extends Thread {
                 search.join();
             }
 
+            writer.println(results.length + " files searched.");
+            int totalMatches = 0;
+            for (Result result : results) {
+                if (result != null) {
+                    writer.println(result.getKeyWordCount() + " matches found in file " + result.getFileName());
+                    totalMatches += result.getKeyWordCount();
+                }
+            }
+            writer.println(totalMatches + " matches found in total.");
+            writer.println("END");
+
 
         } catch (IOException e) {
             throw new RuntimeException(e);
