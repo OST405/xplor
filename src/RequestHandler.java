@@ -56,7 +56,7 @@ public class RequestHandler extends Thread {
             List<File> files = FilesUtils.listFilesRecursively(path);
 
             Result[] results = new Result[files.size()];
-            int resultsIndex = 0;
+            int[] resultsIndex = {0};
 
             Search[] threads = new Search[noOfThreads];
 
@@ -77,11 +77,11 @@ public class RequestHandler extends Thread {
                 }
             }
 
-            for (Thread thread : threads) {
-                thread.start();
+            for (Thread search : threads) {
+                search.start();
             }
-            for (Thread thread : threads) {
-                thread.join();
+            for (Thread search : threads) {
+                search.join();
             }
 
 

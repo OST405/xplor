@@ -11,9 +11,9 @@ public class EqualDistributionSearch extends Search {
     private final int j;
     private final String keyWord;
     private final Result[] results;
-    private int resultsIndex;
+    private int[] resultsIndex;
 
-    public EqualDistributionSearch(File[] files, int i, int j, String keyWord, Result[] results, int resultsIndex) {
+    public EqualDistributionSearch(File[] files, int i, int j, String keyWord, Result[] results, int[] resultsIndex) {
         super();
         this.files = files;
         this.i = i;
@@ -27,8 +27,8 @@ public class EqualDistributionSearch extends Search {
         for (int k = i; k < j; k++) {
             Result result = search(files[k], keyWord);
             if (result != null) {
-                results[resultsIndex] = result;
-                resultsIndex++;
+                results[resultsIndex[0]] = result;
+                resultsIndex[0]++;
             }
         }
         threadIsDone();

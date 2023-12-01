@@ -8,12 +8,12 @@ import java.util.Queue;
 public class RoundRobinSearch extends Search {
 
     private final Queue<File> files;
-    private int resultsIndex;
+    private int[] resultsIndex;
     private final Result[] results;
     private final String keyWord;
 
 
-    public RoundRobinSearch(Queue<File> files, int resultsIndex, Result[] results, String keyWord) {
+    public RoundRobinSearch(Queue<File> files, int[] resultsIndex, Result[] results, String keyWord) {
         super();
         this.files = files;
         this.resultsIndex = resultsIndex;
@@ -40,7 +40,7 @@ public class RoundRobinSearch extends Search {
     }
 
     private synchronized void addResult(Result result) {
-        results[resultsIndex] = result;
-        resultsIndex++;
+        results[resultsIndex[0]] = result;
+        resultsIndex[0]++;
     }
 }
