@@ -6,14 +6,14 @@ import java.io.File;
 import java.util.List;
 
 public class EqualDistributionSearch extends Search {
-    private final File[] files;
+    private final String[] files;
     private final int i;
     private final int j;
     private final String keyWord;
     private final Result[] results;
     private int[] resultsIndex;
 
-    public EqualDistributionSearch(File[] files, int i, int j, String keyWord, Result[] results, int[] resultsIndex) {
+    public EqualDistributionSearch(String[] files, int i, int j, String keyWord, Result[] results, int[] resultsIndex) {
         super();
         this.files = files;
         this.i = i;

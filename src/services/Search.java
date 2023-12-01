@@ -9,18 +9,17 @@ import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public abstract class Search extends Thread {
-    private long startTime;
-    private long endTime;
+     public long startTime;
+     public long endTime;
     private File[] searchedFiles;
     private File[] matchedFiles;
 
     public Search() {
         startTime = System.currentTimeMillis();
     }
-    protected Result search(File file, String keyword) {
-        String fileName = file.getName();
-        String filePath = file.getAbsolutePath();
-
+    protected Result search(String file, String keyword) {
+        String fileName = getFileNameFromPath(file);
+        String filePath = file;
         try {
             // Build the grep command
             String[] command = {"grep", "-c", keyword, filePath};
@@ -54,6 +53,11 @@ public abstract class Search extends Thread {
 
         // Return a utils.Result indicating an error
         return null;
+    }
+
+    public String getFileNameFromPath(String path){
+        String[] pathParts = path.split("/");
+        return pathParts[pathParts.length - 1];
     }
 
     public void threadIsDone() {

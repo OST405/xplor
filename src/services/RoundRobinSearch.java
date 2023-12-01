@@ -7,13 +7,13 @@ import java.util.Queue;
 
 public class RoundRobinSearch extends Search {
 
-    private final Queue<File> files;
+    private final Queue<String> files;
     private int[] resultsIndex;
     private final Result[] results;
     private final String keyWord;
 
 
-    public RoundRobinSearch(Queue<File> files, int[] resultsIndex, Result[] results, String keyWord) {
+    public RoundRobinSearch(Queue<String> files, int[] resultsIndex, Result[] results, String keyWord) {
         super();
         this.files = files;
         this.resultsIndex = resultsIndex;
@@ -23,7 +23,7 @@ public class RoundRobinSearch extends Search {
 
     public void run() {
         while (true) {
-            File file = getNextFile();
+            String file = getNextFile();
             if (file == null) {
                 break; // No more files to process
             }
@@ -35,7 +35,7 @@ public class RoundRobinSearch extends Search {
         threadIsDone();
     }
 
-    private synchronized File getNextFile() {
+    private synchronized String getNextFile() {
         return files.poll();
     }
 
