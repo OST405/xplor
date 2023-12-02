@@ -4,10 +4,12 @@ public class Result {
     private int keyWordCount;
     private String fileName;
     private String filePath;
-    public Result( String fileName, String filePath) {
+    private long threadId;
+    public Result( String fileName, String filePath,long threadId) {
         this.fileName = fileName;
         this.filePath = filePath;
         this.keyWordCount = 0;
+        this.threadId=threadId;
     }
 
     public int getKeyWordCount() {
@@ -21,5 +23,8 @@ public class Result {
     }
     public void setKeyWordCount(int keyWordCount) {
         this.keyWordCount = keyWordCount;
+    }
+    public long getThreadId() {
+        return threadId;
     }
 }

@@ -38,7 +38,7 @@ public abstract class Search extends Thread {
 
             if (exitCode == 0) {
                 // Successfully executed
-                Result result = new Result(fileName, filePath);
+                Result result = new Result(fileName, filePath,Thread.currentThread().getId());
                 result.setKeyWordCount(resultCount);
                 return result;
             } else {

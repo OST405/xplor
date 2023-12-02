@@ -88,21 +88,25 @@ public class RequestHandler extends Thread {
             for (Search search : threads) {
                 search.join();
                 if(counter==1)
-                    ThreadsStats.append("\nThread ").append(counter).append(" run time is ").append(search.endTime - search.startTime).append(" ms\n");
+                    ThreadsStats.append("\nThread ").append(search.threadId()).append(" run time is ").append(search.endTime - search.startTime).append(" ms\n");
                 else if(counter > 1 && counter < threads.length)
-                    ThreadsStats.append("Thread ").append(counter).append(" run time is ").append(search.endTime - search.startTime).append(" ms\n");
+                    ThreadsStats.append("Thread ").append(search.threadId()).append(" run time is ").append(search.endTime - search.startTime).append(" ms\n");
                 else if(counter == threads.length)
-                    ThreadsStats.append("Thread ").append(counter).append(" run time is ").append(search.endTime - search.startTime).append(" ms");
+                    ThreadsStats.append("Thread ").append(search.threadId()).append(" run time is ").append(search.endTime - search.startTime).append(" ms");
                 totalRunTime+=search.endTime-search.startTime;
                 counter++;
             }
 
             writer.println(results.length + " files searched.");
             int totalMatches = 0;
-            for (Result result : results) {
-                if (result != null) {
-                    writer.println(result.getKeyWordCount() + " matches found in file " + result.getFileName());
-                    totalMatches += result.getKeyWordCount();
+            for(Search search : threads){
+                System.out.println();
+                System.out.println("Results for thread "+search.threadId()+":");
+                for (Result result : results) {
+                    if (result != null && result.getThreadId() == search.threadId()) {
+                        writer.println("Thread "+search.threadId()+": "+result.getKeyWordCount() + " matches found in file " + result.getFileName());
+                        totalMatches += result.getKeyWordCount();
+                    }
                 }
             }
             writer.println(ThreadsStats);
