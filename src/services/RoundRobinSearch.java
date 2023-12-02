@@ -13,8 +13,8 @@ public class RoundRobinSearch extends Search {
     private final String keyWord;
 
 
-    public RoundRobinSearch(Queue<String> files, int[] resultsIndex, Result[] results, String keyWord) {
-        super();
+    public RoundRobinSearch(Queue<String> files, int[] resultsIndex, Result[] results, String keyWord,int threadId) {
+        super(threadId);
         this.files = files;
         this.resultsIndex = resultsIndex;
         this.results = results;

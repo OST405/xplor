@@ -11,10 +11,10 @@ import java.util.Scanner;
 public abstract class Search extends Thread {
      public long startTime;
      public long endTime;
-    private File[] searchedFiles;
-    private File[] matchedFiles;
+     private int threadId;
 
-    public Search() {
+    public Search(int threadId) {
+        this.threadId = threadId;
         startTime = System.currentTimeMillis();
     }
     protected Result search(String file, String keyword) {
@@ -22,7 +22,7 @@ public abstract class Search extends Thread {
         String filePath = file;
         try {
             // Build the grep command
-            String[] command = {"grep", "-c", keyword, filePath};
+            String[] command = {"grep", "-ci", keyword, filePath};
 
             // Start a new process
             ProcessBuilder processBuilder = new ProcessBuilder(command);
@@ -38,7 +38,7 @@ public abstract class Search extends Thread {
 
             if (exitCode == 0) {
                 // Successfully executed
-                Result result = new Result(fileName, filePath,Thread.currentThread().getId());
+                Result result = new Result(fileName, filePath,this.threadId);
                 result.setKeyWordCount(resultCount);
                 return result;
             } else {
@@ -58,6 +58,9 @@ public abstract class Search extends Thread {
     public String getFileNameFromPath(String path){
         String[] pathParts = path.split("/");
         return pathParts[pathParts.length - 1];
+    }
+    public int getThreadId(){
+        return this.threadId;
     }
 
     public void threadIsDone() {

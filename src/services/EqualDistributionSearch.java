@@ -13,8 +13,8 @@ public class EqualDistributionSearch extends Search {
     private final Result[] results;
     private int[] resultsIndex;
 
-    public EqualDistributionSearch(String[] files, int i, int j, String keyWord, Result[] results, int[] resultsIndex) {
-        super();
+    public EqualDistributionSearch(String[] files, int i, int j, String keyWord, Result[] results, int[] resultsIndex,int threadId) {
+        super(threadId);
         this.files = files;
         this.i = i;
         this.j = j;

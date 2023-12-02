@@ -66,15 +66,15 @@ public class RequestHandler extends Thread {
                 int i = 0;
                 int j = noOfFilesPerThread;
                 for (int k = 0; k < noOfThreads - 1; k++) {
-                    threads[k] = new EqualDistributionSearch(files.toArray(new String[0]), i, j, keyword, results, resultsIndex);
+                    threads[k] = new EqualDistributionSearch(files.toArray(new String[0]), i, j, keyword, results, resultsIndex,k);
                     i = j;
                     j += noOfFilesPerThread;
                 }
-                threads[noOfThreads - 1] = new EqualDistributionSearch(files.toArray(new String[0]), i, j + noOfFiles % noOfThreads, keyword, results, resultsIndex);
+                threads[noOfThreads - 1] = new EqualDistributionSearch(files.toArray(new String[0]), i, j + noOfFiles % noOfThreads, keyword, results, resultsIndex,noOfThreads-1);
             } else {
                 Queue<String> filesQueue = FilesUtils.convertFilesToQueue(files.toArray(new String[0]));
                 for (int i = 0; i < noOfThreads; i++) {
-                    threads[i] = new RoundRobinSearch(filesQueue, resultsIndex, results, keyword);
+                    threads[i] = new RoundRobinSearch(filesQueue, resultsIndex, results, keyword,i);
                 }
             }
 
@@ -88,11 +88,11 @@ public class RequestHandler extends Thread {
             for (Search search : threads) {
                 search.join();
                 if(counter==1)
-                    ThreadsStats.append("\nThread ").append(search.threadId()).append(" run time is ").append(search.endTime - search.startTime).append(" ms\n");
+                    ThreadsStats.append("\nThread ").append(search.getThreadId()).append(" run time is ").append(search.endTime - search.startTime).append(" ms\n");
                 else if(counter > 1 && counter < threads.length)
-                    ThreadsStats.append("Thread ").append(search.threadId()).append(" run time is ").append(search.endTime - search.startTime).append(" ms\n");
+                    ThreadsStats.append("Thread ").append(search.getThreadId()).append(" run time is ").append(search.endTime - search.startTime).append(" ms\n");
                 else if(counter == threads.length)
-                    ThreadsStats.append("Thread ").append(search.threadId()).append(" run time is ").append(search.endTime - search.startTime).append(" ms");
+                    ThreadsStats.append("Thread ").append(search.getThreadId()).append(" run time is ").append(search.endTime - search.startTime).append(" ms");
                 totalRunTime+=search.endTime-search.startTime;
                 counter++;
             }
@@ -101,10 +101,10 @@ public class RequestHandler extends Thread {
             int totalMatches = 0;
             for(Search search : threads){
                 System.out.println();
-                System.out.println("Results for thread "+search.threadId()+":");
+                System.out.println("Results for thread "+search.getThreadId()+":");
                 for (Result result : results) {
-                    if (result != null && result.getThreadId() == search.threadId()) {
-                        writer.println("Thread "+search.threadId()+": "+result.getKeyWordCount() + " matches found in file " + result.getFileName());
+                    if (result != null && result.getThreadId() == search.getThreadId()) {
+                        writer.println("Thread "+search.getThreadId()+": "+result.getKeyWordCount() + " matches found in file " + result.getFileName());
                         totalMatches += result.getKeyWordCount();
                     }
                 }
