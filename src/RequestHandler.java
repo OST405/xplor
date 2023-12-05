@@ -34,23 +34,12 @@ public class RequestHandler extends Thread {
             writer.println("Enter the path:");
             String path = reader.readLine();
             // Prompt the client for the search algorithm choice
-            writer.println("Choose a search algorithm (1 for Equal Distribution, 2 for Round Robin):");
-            boolean invalidChoice = true;
-            while (invalidChoice) {
-                switch (Integer.parseInt(reader.readLine())) {
-                    case 1:
-                        algorithmChoice = AlgorithmChoice.EQUAL_DISTRIBUTION;
-                        invalidChoice = false;
-                        break;
-                    case 2:
-                        algorithmChoice = AlgorithmChoice.ROUND_ROBIN;
-                        invalidChoice = false;
-                        break;
-                    default:
-                        writer.println("Invalid choice. Please try again: ");
-                        break;
-                }
-            }
+            writer.println("Choose a search algorithm (1 for Equal Distribution, 2 for Round Robin, 3 to Quit):");
+            algorithmChoice = switch (Integer.parseInt(reader.readLine())) {
+                case 1 -> AlgorithmChoice.EQUAL_DISTRIBUTION;
+                case 2 -> AlgorithmChoice.ROUND_ROBIN;
+                default -> algorithmChoice;
+            };
 
             int noOfThreads = Runtime.getRuntime().availableProcessors();
 
